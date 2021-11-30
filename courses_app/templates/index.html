@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="add-top-half">
+            <h2>Add a new course</h2>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="mb-3 label-input">
+                    <label for="name">Name: </label>
+                    <input type="text" id="name" name="name" class="col-8">
+                </div>
+                <div class="mb-3 label-input">
+                    <label for="desc">Description: </label>
+                    <textarea type="text" id="name" name="desc" rows="4" cols="30"></textarea>
+                </div>
+                <button class="btn btn-primary">Add</button>
+            </form>
+        </div>
+        <div id="add-bottom-half">
+            <h2>Courses</h2>
+            <table>
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Date Added</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <!-- <th scope="row">{{course.id}}</th> -->
+                        <td>{{course.name}}</td>
+                        <td>{{course.network}}</td>
+                        <td>{{course.release_date}}</td>
+                        <td>
+                            <form action="/courses/destroy/{{course.id}}" method="POST">
+                                {% csrf_token %}
+                                <a href="">remove</a>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
