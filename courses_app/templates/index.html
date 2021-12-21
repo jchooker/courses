@@ -13,7 +13,7 @@
     <div id="wrapper">
         <div id="add-top-half">
             <h2>Add a new course</h2>
-            <form action="" method="POST">
+            <form action="courses/add_course" method="POST">
                 {% csrf_token %}
                 <div class="mb-3 label-input">
                     <label for="name">Name: </label>
@@ -28,7 +28,7 @@
         </div>
         <div id="add-bottom-half">
             <h2>Courses</h2>
-            <table>
+            <table class=''>
                 <thead class="table-light">
                     <tr>
                         <th scope="col">Course Name</th>
@@ -40,14 +40,13 @@
                 <tbody>
                     {% for course in courses %}
                     <tr>
-                        <!-- <th scope="row">{{course.id}}</th> -->
-                        <td>{{course.name}}</td>
-                        <td>{{course.network}}</td>
+                        <th scope="row">{{course.name}}</th>
+                        <td>{{course.desc.notes}}</td>
                         <td>{{course.release_date}}</td>
                         <td>
-                            <form action="/courses/destroy/{{course.id}}" method="POST">
+                            <form method="POST">
                                 {% csrf_token %}
-                                <a href="">remove</a>
+                                <a href='courses/del_page/{{course.id}}'>remove</a>
                             </form>
                         </td>
                     </tr>

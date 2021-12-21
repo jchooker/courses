@@ -12,7 +12,7 @@ def index(request):
 def add_course(request):
     # assign values to new obj
     add_obj = Course.objects.create(name=request.POST['name'],
-    desc=request.POST['desc']
+    desc=Description.objects.create(notes=request.POST['desc'])
     )
     return redirect("/")
 
